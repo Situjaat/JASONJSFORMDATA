@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #h3 {
+      text-align: center;
+      margin-top: 30px;
+   
+    }
+
+    #main {
+      width:96%;
+      margin: 0 auto;
+      background-color: rgb(237, 225, 225);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      /* height: 550px; */
+     display: flex;
+     justify-content: space-around;
+      
+    }
+#div_img{
+    width: 50%;
+}
+#ff{
+    width: 45%;
+    /* background-color:rgb(218, 209, 209) */
+}
+img{
+    width: 100%;
+    height: 550px;
+    border-radius: 10px;
+}
+#form {
+    width: 80%;
+      margin: auto;
+      margin-top: 20px;
+     
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea
+     {
+      width: 100% ;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+      
+    }
+   select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+      text-align: center;
+      
+    }
+    textarea {
+      height: 100px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: auto;
+      text-align: center;
+    }
+    #btn{
+      text-align: center;
+      margin-top: 30px;
+    }
+   
+    button:hover {
+      background-color: #45a049;
+    }
+    #table_div{
+        width: 100%;
+        margin-top: 20px;
+    }
+    table{
+        border-collapse: collapse;
+        border: 1px solid blue;
+        width: 80%;
+        margin: auto;
+        font-size: 20px;
+    }
+  th,td{
+    border: 1px solid blue;
+  }
+  th{
+    background-color: #9ab6d3;
+  }
+    </style>
+</head>
+<body>
+    <div id="h3"> <h1>Registration Form</h1></div>
+    <div id="main">
+        <div id="div_img">
+            <img src="./pic.jpg" alt="">
+        </div>
+        <div id="ff">
+    <form id="form">
+        
+     <label>Name:</label><input type="text" placeholder="Enter name"  id="name" > <br><br>
+     <label>Mobile:</label><input type="text" placeholder="Enter mobile"  id="mobile" > <br><br>
+     <label>Email:</label><input type="text" placeholder="Enter Email"  id="email" > <br><br>
+       <label> City:</label>
+       <select id="city">
+        <option value="Select">----Select----</option>
+        <option value="Jaipur">Jaipur</option>
+        <option value="Alwar">Alwar</option>
+        <option value="Sikar">Sikar</option>
+       </select> <br><br>
+       <label> Address:</label>
+       <textarea id="address"> </textarea>
+       <div id="btn">
+       <button id="submit">Submit</button>
+        </div>
+    </form>
+</div> </div>
+<div id="table_div"></div>
+</body>
+<script>
+// let arr=[];
+// let form=document.getElementById("form")
+// let btn =document.getElementById("submit")
+// btn.addEventListener("click",getvalue);
+// function getvalue(event){
+// event.preventDefault();
+// let obj={
+//     name:document.getElementById("name").value,
+//     mobile:document.getElementById("mobile").value,
+//     email:document.getElementById("email").value,
+//         city:document.getElementById("city").value,
+//         adress:document.getElementById("text").value
+// }
+// arr.push(obj)
+// console.log(arr)
+// form.reset()
+// }
+
+let arr= JSON.parse(localStorage.getItem("abc"))|| [];
+
+let form= document.getElementById("form")
+let btn= document.getElementById("submit")
+
+btn.addEventListener("click" , situ)
+function situ(event){
+event.preventDefault();
+let obj={
+    name:document.getElementById("name").value,
+        mobile:document.getElementById("mobile").value,
+        email:document.getElementById("email").value,
+        city:document.getElementById("city").value,
+        address:document.getElementById("address").value
+}
+arr.push(obj)
+localStorage.setItem("abc", JSON.stringify(arr))
+form.reset()
+}
+
+function jitu (xyz) {
+    let table= document.createElement("table")
+    let thead= document.createElement("thead")
+    let tbody= document.createElement("tbody")
+
+    let head= document.createElement("tr")
+    let th=document.createElement("th")
+    th.innerText="Name" 
+    let th1=document.createElement("th")
+    th1.innerText="Mobile"
+    let th2=document.createElement("th")
+    th2.innerText="Email"
+        let th3=document.createElement("th")
+        th3.innerText="City" 
+        let th4=document.createElement("th")
+        th4.innerText="Address"   
+head.append(th,th1,th2,th3,th4)
+thead.append(head)
+table.append(thead)
+
+    xyz.forEach(element => {
+        let row= document.createElement("tr")
+        let td= document.createElement("td")
+        td.innerText=element.name
+        let td1= document.createElement("td")
+        td1.innerText=element.mobile
+        let td2= document.createElement("td")
+        td2.innerText=element.email
+        let td3= document.createElement("td")
+        td3.innerText=element.city
+        let td4= document.createElement("td")
+        td4.innerText=element.address
+
+        row.append(td,td1,td2,td3,td4)
+        tbody.append(row)
+        table.append(tbody)
+    });
+  table_div.append(table)  
+}
+
+jitu(arr)
+
+</script>
+</html>
